@@ -38,13 +38,18 @@ endif()
 
 add_library(wxfreechart ${wxfreechart_LINK} ${wxfreechart_SRC} ${wxfreechart_HEADERS})
 
-set_target_properties(wxfreechart PROPERTIES PUBLIC_HEADER "${wxfreechart_HEADERS}")
+#set_target_properties(wxfreechart PROPERTIES PUBLIC_HEADER "${wxfreechart_HEADERS}")
 
 target_link_libraries(wxfreechart ${wxWidgets_LIBRARIES})
 
 install(TARGETS wxfreechart EXPORT wxfreechart-targets
   RUNTIME DESTINATION ${wxfreechart_INSTALL_BIN_DIR} COMPONENT bin
   LIBRARY DESTINATION ${wxfreechart_INSTALL_LIB_DIR} COMPONENT lib
-  PUBLIC_HEADER DESTINATION "${wxfreechart_INSTALL_INCLUDE_DIR}/wxfreechart" COMPONENT dev)
+)
+  
+install(DIRECTORY ../include/
+  DESTINATION "${wxfreechart_INSTALL_INCLUDE_DIR}/wxfreechart"
+  COMPONENT dev
+)
 
 
