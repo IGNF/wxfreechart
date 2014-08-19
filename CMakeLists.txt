@@ -7,18 +7,11 @@ set(wxfreechart_PATCH_VERSION 0)
 set(wxfreechart_VERSION
   ${wxfreechart_MAJOR_VERSION}.${wxfreechart_MINOR_VERSION}.${wxfreechart_PATCH_VERSION})
 
-if(WIN32 AND NOT CYGWIN)
-  set(wxfreechart_DEF_INSTALL_CMAKE_DIR cmake)
-else()
-  set(wxfreechart_DEF_INSTALL_CMAKE_DIR lib/cmake/wxfreechart)
-endif()
-
 # Offer the user the choice of overriding the installation directories
 set(wxfreechart_INSTALL_LIB_DIR     lib     CACHE PATH "Installation directory for libraries"   )
 set(wxfreechart_INSTALL_BIN_DIR     bin     CACHE PATH "Installation directory for executables" )
 set(wxfreechart_INSTALL_INCLUDE_DIR include CACHE PATH "Installation directory for header files")
-set(wxfreechart_INSTALL_CMAKE_DIR ${wxfreechart_DEF_INSTALL_CMAKE_DIR} CACHE PATH
-  "Installation directory for CMake files")
+set(wxfreechart_INSTALL_CMAKE_DIR   cmake   CACHE PATH "Installation directory for CMake files")
 
 # Make relative paths absolute (needed later on)
 foreach(p LIB BIN INCLUDE CMAKE)
@@ -63,5 +56,5 @@ install(FILES
  
 # Install the export set for use with the install-tree
 install(EXPORT wxfreechart-targets DESTINATION
-  "${wxfreechart_INSTALL_CMAKE_DIR}" COMPONENT dev)
+  "${wxfreechart_INSTALL_LIB_DIR}" COMPONENT dev)
 
