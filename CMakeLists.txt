@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 2.8)
 project(wxfreechart CXX)
 
+set(CMAKE_BUILD_TYPE "Release")
+
 set(wxfreechart_MAJOR_VERSION 1)
 set(wxfreechart_MINOR_VERSION 4)
 set(wxfreechart_PATCH_VERSION 0)
