@@ -58,5 +58,5 @@ install(FILES
  
 # Install the export set for use with the install-tree
 install(EXPORT wxfreechart-targets DESTINATION
-  "${wxfreechart_INSTALL_LIB_DIR}" COMPONENT dev)
+  "${wxfreechart_INSTALL_CMAKE_DIR}" COMPONENT dev)
 
