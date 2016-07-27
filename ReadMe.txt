@@ -34,14 +34,15 @@
  Installation - unix
  -------------------
 
- When building on a Linux/GNU-based system, type
-
-  ./configure
-  make
+ When building on a Linux/GNU-based system, create and cd to a build subdirectory. Then type
+ 
+ cmake ..
+ make
   
- to build against the default build of wxWidgets (the one listed as 'default'
- by wx-config --list). Type "./configure --help" for more info.
-
+ To build and run the samples:
+ Change the option from OFF to ON in the sample/CMakeLists.txt:
+ 
+ option(BUILD_WXFREECHARTDEMO "Build wxfreechartdemo" ON)
 
 
  ChangeLog
