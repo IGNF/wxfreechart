@@ -3,14 +3,9 @@
 // Purpose:
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
-// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
-
-#ifdef WIN32
-	#pragma warning(disable : 4251)
-	#pragma warning(disable : 4275)
-#endif
 
 #include <wx/dynarray.h>
 #include <wx/arrimpl.cpp>
@@ -47,7 +42,7 @@ wxColour GetDefaultColour(size_t index)
 	return defaultColours[index];
 }
 
-Symbol WXDLLIMPEXP_FREECHART *GetDefaultSymbol(size_t index)
+Symbol *GetDefaultSymbol(size_t index)
 {
 	size_t count = defaultSymbols.Count();
 

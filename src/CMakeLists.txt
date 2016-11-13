@@ -18,14 +18,14 @@ macro(wxfreechart_add_module src  module MODULE default)
 endmacro(wxfreechart_add_module)
 
 wxfreechart_add_module(wxfreechart_SRC axis         AXIS         1)
-wxfreechart_add_module(wxfreechart_SRC category     CATEGORY     1)
 wxfreechart_add_module(wxfreechart_SRC bars         BARS         1)
+wxfreechart_add_module(wxfreechart_SRC category     CATEGORY     1)
+wxfreechart_add_module(wxfreechart_SRC gantt        GANTT        1)
+wxfreechart_add_module(wxfreechart_SRC ohlc         OHLC         1)
+wxfreechart_add_module(wxfreechart_SRC pie          PIE          1)
 wxfreechart_add_module(wxfreechart_SRC xy           XY           1)
-wxfreechart_add_module(wxfreechart_SRC xy/functions XY_FUNCTIONS 0)
-wxfreechart_add_module(wxfreechart_SRC xyz          XYZ          0)
-wxfreechart_add_module(wxfreechart_SRC gantt        GANTT        0)
-wxfreechart_add_module(wxfreechart_SRC ohlc         OHLC         0)
-wxfreechart_add_module(wxfreechart_SRC pie          PIE          0)
+wxfreechart_add_module(wxfreechart_SRC xy/functions XY_FUNCTIONS 1)
+wxfreechart_add_module(wxfreechart_SRC xyz          XYZ          1)
 
 add_definitions("-D_LOCAL_")
 
@@ -46,10 +46,8 @@ install(TARGETS wxfreechart EXPORT wxfreechart-targets
   RUNTIME DESTINATION ${wxfreechart_INSTALL_BIN_DIR} COMPONENT bin
   LIBRARY DESTINATION ${wxfreechart_INSTALL_LIB_DIR} COMPONENT lib
 )
-  
+
 install(DIRECTORY ../include/
   DESTINATION "${wxfreechart_INSTALL_INCLUDE_DIR}/wxfreechart"
   COMPONENT dev
 )
-
-

@@ -3,17 +3,12 @@
 // Purpose: base declarations
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
-// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #ifndef WXFREECHARTDEFS_H
 #define WXFREECHARTDEFS_H
-
-#ifdef WIN32
-	#pragma warning(disable : 4251)
-	#pragma warning(disable : 4275)
-#endif
 
 #include <wx/wxprec.h>
 

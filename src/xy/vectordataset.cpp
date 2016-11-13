@@ -3,7 +3,7 @@
 // Purpose: vector dataset implementation
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
-// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -14,8 +14,7 @@
 WX_DEFINE_EXPORTED_OBJARRAY(wxDoubleArray);
 
 
-VectorDataset::VectorDataset(const wxString& name)
-    : m_scaleX(1.), m_X0(1.), m_name(name)
+VectorDataset::VectorDataset()
 {
 }
 
@@ -25,7 +24,7 @@ VectorDataset::~VectorDataset()
 
 double VectorDataset::GetX(size_t index, size_t WXUNUSED(serie))
 {
-	return m_scaleX * index + m_X0;
+	return index + 1;
 }
 
 double VectorDataset::GetY(size_t index, size_t WXUNUSED(serie))
@@ -45,5 +44,5 @@ size_t VectorDataset::GetSerieCount()
 
 wxString VectorDataset::GetSerieName(size_t serie)
 {
-        return m_name;
+	return wxEmptyString;
 }

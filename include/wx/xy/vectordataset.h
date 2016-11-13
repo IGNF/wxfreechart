@@ -3,7 +3,7 @@
 // Purpose: vector dataset declarations
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
-// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -28,7 +28,7 @@ public:
 	 * @param _name name of dataset
 	 * @param autoUpdate if true any changes in data will fire dataset updated event
 	 */
-        VectorDataset(const wxString& name = wxEmptyString);
+	VectorDataset();
 	virtual ~VectorDataset();
 
 	virtual size_t GetSerieCount();
@@ -87,15 +87,8 @@ public:
 		DatasetChanged();
 	}
 
-	void SetScaleX(double s) { m_scaleX = s; DatasetChanged(); }
-	double GetScaleX() const { return m_scaleX; }
-	void SetX0(double x) { m_X0 = x; DatasetChanged(); }
-	double GetX0() const { return m_X0; }
-
 private:
 	wxDoubleArray m_values;
-	double m_scaleX, m_X0;
-        wxString m_name;
 };
 
 #endif /*VECTORDATASET_H_*/

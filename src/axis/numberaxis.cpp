@@ -3,7 +3,7 @@
 // Purpose: number axis implementation
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
-// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -16,7 +16,7 @@
 
 bool IsNormalValue(double v)
 {
-	switch (std::fpclass(v)) {
+	switch (_fpclass(v)) {
 		case _FPCLASS_SNAN:
 		case _FPCLASS_QNAN:
 		case _FPCLASS_NINF:
@@ -27,11 +27,11 @@ bool IsNormalValue(double v)
 	}
 }
 #else
-#include <cmath>
+#include <math.h>
 
 bool IsNormalValue(double v)
 {
-	switch (std::fpclassify(v)) {
+	switch (fpclassify(v)) {
 		case FP_NAN:
 		case FP_INFINITE:
 		case FP_SUBNORMAL:
@@ -59,8 +59,7 @@ NumberAxis::NumberAxis(AXIS_LOCATION location)
 
 	m_intValues = false;
 	m_hasLabels = false;
-	m_fixedMin = false;
-	m_fixedMax = false;
+	m_fixedBounds = false;
 }
 
 NumberAxis::~NumberAxis()
@@ -73,28 +72,11 @@ bool NumberAxis::AcceptDataset(Dataset *WXUNUSED(dataset))
 	return true;
 }
 
-void NumberAxis::SetFixedMax(double maxValue)
-{
-	m_maxValue = maxValue;
-	m_fixedMax = true;
-	UpdateTickValues();
-	FireBoundsChanged();
-}
-
-void NumberAxis::SetFixedMin(double minValue)
-{
-	m_minValue = minValue;
-	m_fixedMin = true;
-	UpdateTickValues();
-	FireBoundsChanged();
-}
-
 void NumberAxis::SetFixedBounds(double minValue, double maxValue)
 {
 	m_minValue = minValue;
 	m_maxValue = maxValue;
-	m_fixedMin = true;
-	m_fixedMax = true;
+	m_fixedBounds = true;
 
 	UpdateTickValues();
 	FireBoundsChanged();
@@ -102,7 +84,7 @@ void NumberAxis::SetFixedBounds(double minValue, double maxValue)
 
 void NumberAxis::UpdateBounds()
 {
-	if (m_fixedMin && m_fixedMax) {
+	if (m_fixedBounds) {
 		return ; // bounds are fixed, so don't update
 	}
 
@@ -111,13 +93,16 @@ void NumberAxis::UpdateBounds()
 	for (size_t n = 0; n < m_datasets.Count(); n++) {
 		bool verticalAxis = IsVertical();
 
-		if(!m_fixedMin) {
-			double minValue = m_datasets[n]->GetMinValue(verticalAxis);
-			m_minValue = (n==0)? minValue : wxMin(m_minValue, minValue);
+		double minValue = m_datasets[n]->GetMinValue(verticalAxis);
+		double maxValue = m_datasets[n]->GetMaxValue(verticalAxis);
+
+		if (n == 0) {
+			m_minValue = minValue;
+			m_maxValue = maxValue;
 		}
-		if(!m_fixedMax) {
-			double maxValue = m_datasets[n]->GetMaxValue(verticalAxis);
-			m_maxValue = (n==0)? maxValue : wxMin(m_maxValue, maxValue);
+		else {
+			m_minValue = wxMin(m_minValue, minValue);
+			m_maxValue = wxMax(m_maxValue, maxValue);
 		}
 	}
 

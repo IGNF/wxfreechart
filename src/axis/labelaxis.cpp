@@ -3,7 +3,7 @@
 // Purpose: label axis implementation
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
-// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -271,29 +271,19 @@ void LabelAxis::Draw(wxDC &dc, wxRect rc)
 					y = rc.y + titleExtent.x;
 					break;
 				case wxCENTER:
-					y = rc.y + (rc.height + titleExtent.x) / 2;
+					y = (rc.y + rc.height) / 2 + titleExtent.x / 2;
 					break;
 				case wxBOTTOM:
 					y = rc.y + rc.height;
 					break;
 				default:
 					// fallback to center
-					y = rc.y + (rc.height + titleExtent.x) / 2;
+					y = (rc.y + rc.height) / 2 + titleExtent.x / 2;
 			}
-			wxCoord x;
+
+			dc.DrawRotatedText(m_title, rc.x, y, 90);
+			rc.x += titleExtent.y;
 			rc.width -= titleExtent.y;
-			switch (GetLocation()) {
-			case AXIS_LEFT:
-				x = rc.x;
-				rc.x += titleExtent.y;
-				break;
-			case AXIS_RIGHT:
-				x = rc.x+rc.width;
-				break;
-			default:
-				return ; // BUG
-			}
-			dc.DrawRotatedText(m_title, x, y, 90);
 		}
 		else {
 			wxCoord x;
@@ -302,30 +292,18 @@ void LabelAxis::Draw(wxDC &dc, wxRect rc)
 					x = rc.x;
 					break;
 				case wxCENTER:
-					x = rc.x + (rc.width - titleExtent.x) / 2;
+					x = (rc.x + rc.width) / 2 - titleExtent.x / 2;
 					break;
 				case wxRIGHT:
 					x = rc.x + rc.width - titleExtent.x;
 					break;
 				default:
 					// fallback to center
-					x = rc.x + (rc.width - titleExtent.x) / 2;
+					x = (rc.x + rc.width) / 2 - titleExtent.x / 2;
 			}
 
-			wxCoord y;
+			dc.DrawText(m_title, x, rc.y + rc.height - titleExtent.y);
 			rc.height -= titleExtent.y;
-			switch (GetLocation()) {
-			case AXIS_BOTTOM:
-				y = rc.y + rc.height;
-				break;
-			case AXIS_TOP:
-				y = rc.y;
-				rc.y += titleExtent.y;
-				break;
-			default:
-				return ; // BUG
-			}
-			dc.DrawText(m_title, x, y);
 		}
 	}
 

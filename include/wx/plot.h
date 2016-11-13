@@ -3,7 +3,7 @@
 // Purpose: plot base class declarations
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
-// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -44,20 +44,6 @@ public:
 	Plot();
 	virtual ~Plot();
 
-        /**
-         * Called to begin dataset update.
-         * Each call must have corresponding EndUpdate call.
-         * Increment dataset update counter.
-         */
-        void BeginUpdate();
-
-        /**
-         * Called to end dataset update.
-         * Decrement dataset update counter, and fires
-         * DatasetChanged event when counter equal zero.
-         */
-        void EndUpdate();
-
 	/**
 	 * Draws plot
 	 * @param dc device context
@@ -75,7 +61,7 @@ public:
 
 	/**
 	 * Sets plot background.
-	 * @param _background new background for plot
+	 * @param background new background for plot
 	 */
 	void SetBackground(AreaDraw *background)
 	{
@@ -109,14 +95,13 @@ protected:
 	 */
 	virtual void DrawData(wxDC &dc, wxRect rc) = 0;
 
-        FIRE_WITH_THIS_UNLESS_UPDATING(PlotNeedRedraw);
+	FIRE_WITH_THIS(PlotNeedRedraw);
 
 private:
 	wxFont m_textNoDataFont;
 	wxString m_textNoData;
 
 	AreaDraw *m_background;
-        bool m_updating;
 };
 
 #endif /*PLOT_H_*/
