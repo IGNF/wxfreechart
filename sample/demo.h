@@ -10,7 +10,7 @@
 #ifndef DEMO_H_
 #define DEMO_H_
 
-#include <wx/wxprec.h>
+//#include <wx/wxprec.h>
 
 #ifdef __BORLANDC__
     #pragma hdrstop
