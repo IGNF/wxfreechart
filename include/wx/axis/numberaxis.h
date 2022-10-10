@@ -3,7 +3,7 @@
 // Purpose: Number axis declaration.
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
-// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -65,8 +65,6 @@ public:
 	 * @param maxValue maximal data value
 	 */
 	void SetFixedBounds(double minValue, double maxValue);
-	void SetFixedMin(double minValue);
-	void SetFixedMax(double maxValue);
 
 protected:
 	virtual bool AcceptDataset(Dataset *dataset);
@@ -86,7 +84,7 @@ protected:
 
 	virtual void GetDataBounds(double &minValue, double &maxValue);
 
-	size_t GetLabelCount() const;
+  size_t GetLabelCount() const;
 
 private:
 	void UpdateTickValues();
@@ -103,7 +101,7 @@ private:
 
 	bool m_hasLabels;
 
-	bool m_fixedMin, m_fixedMax;
+	bool m_fixedBounds;
 };
 
 #endif /*NUMBERAXIS_H_*/

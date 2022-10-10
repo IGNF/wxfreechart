@@ -10,12 +10,7 @@
 #ifndef DEMO_H_
 #define DEMO_H_
 
-#ifdef WIN32
-	#pragma warning(disable : 4251)
-	#pragma warning(disable : 4275)
-#endif
-
-#include <wx/wxprec.h>
+//#include <wx/wxprec.h>
 
 #ifdef __BORLANDC__
     #pragma hdrstop

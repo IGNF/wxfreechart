@@ -22,20 +22,22 @@ foreach(p LIB BIN INCLUDE CMAKE)
     set(${var} "${CMAKE_INSTALL_PREFIX}/${${var}}")
   endif()
 endforeach()
- 
+
 # set up include-directories
-include_directories(include) 
- 
+include_directories(include)
+FIND_PACKAGE( wxWidgets COMPONENTS core base html adv net aui xrc qa richtext REQUIRED )
+include( ${wxWidgets_USE_FILE} )
+
 add_subdirectory(sample)
 add_subdirectory(src)
- 
+
 # Add all targets to the build-tree export set
 export(TARGETS wxfreechart FILE "${PROJECT_BINARY_DIR}/wxfreechart-targets.cmake")
- 
+
 # Export the package for use from the build-tree
 # (this registers the build-tree with a global CMake-registry)
 export(PACKAGE wxfreechart)
- 
+
 # Create the wxfreechart-config.cmake and wxfreechart-config-version files
 file(RELATIVE_PATH REL_INCLUDE_DIR "${wxfreechart_INSTALL_CMAKE_DIR}" "${wxfreechart_INSTALL_INCLUDE_DIR}")
 
@@ -49,14 +51,13 @@ configure_file(wxfreechart-config.cmake.in "${PROJECT_BINARY_DIR}${CMAKE_FILES_D
 
 # ... for both
 configure_file(wxfreechart-config-version.cmake.in "${PROJECT_BINARY_DIR}/wxfreechart-config-version.cmake" @ONLY)
- 
+
 # Install the wxfreechart-config.cmake and wxfreechart-config-version.cmake
 install(FILES
   "${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/wxfreechart-config.cmake"
   "${PROJECT_BINARY_DIR}/wxfreechart-config-version.cmake"
   DESTINATION "${wxfreechart_INSTALL_CMAKE_DIR}" COMPONENT dev)
- 
+
 # Install the export set for use with the install-tree
 install(EXPORT wxfreechart-targets DESTINATION
   "${wxfreechart_INSTALL_CMAKE_DIR}" COMPONENT dev)
-

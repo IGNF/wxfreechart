@@ -3,7 +3,7 @@
 // Purpose: plot base class implementation
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
-// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -25,7 +25,6 @@ Plot::Plot()
 	m_textNoData = wxT("No data");
 
 	m_background = new NoAreaDraw();
-        m_updating = false;
 }
 
 Plot::~Plot()
@@ -33,18 +32,6 @@ Plot::~Plot()
 	wxDELETE(m_background);
 }
 
-void Plot::BeginUpdate()
-{
-        m_updating = true;
-}
-
-void Plot::EndUpdate()
-{
-        if (m_updating) {
-                m_updating = false;
-                FirePlotNeedRedraw();
-        }
-}
 void Plot::Draw(wxDC &dc, wxRect rc)
 {
 	m_background->Draw(dc, rc);
